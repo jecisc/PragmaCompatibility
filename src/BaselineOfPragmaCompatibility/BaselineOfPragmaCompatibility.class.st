@@ -10,8 +10,24 @@ Class {
 { #category : #baseline }
 BaselineOfPragmaCompatibility >> baseline: spec [
 	<baseline>
-	spec for: #'pharo6.x' do: [ spec package: 'PragmaCompatibility-Pharo6' ].
-	spec for: (self pharoVersionsFrom: 7) do: [ spec package: 'PragmaCompatibility-Pharo7' ]
+	spec
+		for: #'pharo6.x'
+		do: [ spec
+				package: 'PragmaCompatibility-Pharo6';
+				package: 'PragmaCompatibility-Test' with: [ spec requires: 'PragmaCompatibility-Pharo6' ].
+
+			spec
+				group: 'Core' with: #('PragmaCompatibility-Pharo6');
+				group: 'Tests' with: #('PragmaCompatibility-Test') ].
+	spec
+		for: (self pharoVersionsFrom: 7)
+		do: [ spec
+				package: 'PragmaCompatibility-Pharo7';
+				package: 'PragmaCompatibility-Test' with: [ spec requires: 'PragmaCompatibility-Pharo7' ].
+
+			spec
+				group: 'Core' with: #('PragmaCompatibility-Pharo7');
+				group: 'Tests' with: #('PragmaCompatibility-Test') ]
 ]
 
 { #category : #baselines }
